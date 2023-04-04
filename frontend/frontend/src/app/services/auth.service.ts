@@ -5,7 +5,8 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "src/environments/environment";
 import {firstValueFrom} from "rxjs";
 import {AuthRequestModel} from "../models/authRequestModel";
-import {join} from "@angular/compiler-cli";
+import 'url-join';
+import urlJoin from "url-join";
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class AuthService {
   public async authUser(authRequest: AuthRequestModel): Promise<string | undefined> {
     try {
       // Fetch user token from backend
-      let authToken = await firstValueFrom(this.http.post<string>(join(this.apiUri, "auth"), authRequest));
+      let authToken = await firstValueFrom(this.http.post(urlJoin(this.apiUri, "auth"), authRequest, {responseType: 'text'}));
 
       // Set token to cookies
       this._cookieService.set("auth_token", authToken);

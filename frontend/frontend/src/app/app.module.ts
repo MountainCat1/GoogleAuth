@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TestAuthComponent } from './test-auth/test-auth.component';
 import {GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig} from "@abacritt/angularx-social-login";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {CustomHttpInterceptor} from "./services/http-interceptor";
 
 @NgModule({
   declarations: [
@@ -14,7 +16,8 @@ import {GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig} 
   imports: [
     BrowserModule,
     AppRoutingModule,
-    GoogleSigninButtonModule
+    GoogleSigninButtonModule,
+    HttpClientModule
   ],
   providers: [
     {
@@ -27,7 +30,7 @@ import {GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig} 
             provider: new GoogleLoginProvider(
               '934344019711-htpk4uv143hibkpol9vka7fk9qaasq86.apps.googleusercontent.com'
             )
-          },
+          }
         ],
         onError: (err) => {
           console.error(err);

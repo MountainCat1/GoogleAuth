@@ -1,9 +1,7 @@
 import {Component} from '@angular/core';
-import {
-  GoogleLoginProvider, SocialAuthService,
-} from '@abacritt/angularx-social-login';
+import {GoogleLoginProvider, SocialAuthService,} from '@abacritt/angularx-social-login';
 import {AuthService} from "../services/auth.service";
-import {AuthMethod} from "../models/authRequestModel";
+import {AuthMethod, AuthRequestModel} from "../models/authRequestModel";
 
 @Component({
   selector: 'app-test-auth',
@@ -13,6 +11,7 @@ import {AuthMethod} from "../models/authRequestModel";
 export class TestAuthComponent {
   user: any;
   loggedIn: any;
+
 
   constructor(private _socialAuthService: SocialAuthService,
               private _authService: AuthService) {
@@ -26,10 +25,11 @@ export class TestAuthComponent {
       console.log(this.user)
 
 
-      this._authService.authUser({
-        token: user.authToken,
+      let authRequest: AuthRequestModel = {
+        token: this.user.idToken,
         method: AuthMethod.Google
-      })
+      }
+      this._authService.authUser(authRequest)
     });
   }
 
@@ -41,5 +41,16 @@ export class TestAuthComponent {
       this.loggedIn = true;
       console.log(this.user);
     });
+  }
+
+  public forceAuth() {
+    let authRequest: AuthRequestModel = {
+      token: this.user.idToken,
+      method: AuthMethod.Google
+    }
+
+    console.log(authRequest)
+
+    this._authService.authUser(authRequest).then(r => console.log(r));
   }
 }
