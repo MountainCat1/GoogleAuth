@@ -26,7 +26,11 @@ export class AuthService {
   public async authUser(authRequest: AuthRequestModel): Promise<string | undefined> {
     try {
       // Fetch user token from backend
-      let authToken = await firstValueFrom(this.http.post(urlJoin(this.apiUri, "auth"), authRequest, {responseType: 'text'}));
+      let headers : any = {
+        // 'Authorization': `Bearer ${authRequest.token}`
+      };
+
+      let authToken = await firstValueFrom(this.http.post(urlJoin(this.apiUri, "auth/google"), authRequest, {responseType: 'text', headers: headers}));
 
       // Set token to cookies
       this._cookieService.set("auth_token", authToken);
