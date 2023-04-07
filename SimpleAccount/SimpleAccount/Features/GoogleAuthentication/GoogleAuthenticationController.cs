@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SimpleAccount.Dto;
-using SimpleAccount.Features.GoogleAuthentication;
-using SimpleAccount.Services;
 
-namespace SimpleAccount.Controllers;
+namespace SimpleAccount.Features.GoogleAuthentication;
 
 [ApiController]
 [Route("api/auth/google")]

@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using SimpleAccount;
 using SimpleAccount.Features.GoogleAuthentication;
-using SimpleAccount.Services;
 using SimpleAccount.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
